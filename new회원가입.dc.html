@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/payhug-design-system-81d4f219-9751-4714-b38a-af7827ee8f91/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/payhug-design-system-81d4f219-9751-4714-b38a-af7827ee8f91/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/payhug-design-system-81d4f219-9751-4714-b38a-af7827ee8f91/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/payhug-design-system-81d4f219-9751-4714-b38a-af7827ee8f91/tokens/spacing.css">
+  <link rel="stylesheet" href="_ds/payhug-design-system-81d4f219-9751-4714-b38a-af7827ee8f91/styles.css">
+  <script src="_ds/payhug-design-system-81d4f219-9751-4714-b38a-af7827ee8f91/_ds_bundle.js"></script>
+  <style>
+    html, body { margin: 0; padding: 0; background: #EEF0F2; }
+    * { box-sizing: border-box; }
+    input::placeholder { color: #A6AABB; }
+    @keyframes phShake {
+      0%,100% { transform: translateX(0); }
+      20% { transform: translateX(-6px); }
+      40% { transform: translateX(5px); }
+      60% { transform: translateX(-4px); }
+      80% { transform: translateX(2px); }
+    }
+    .ph-shake { animation: phShake 0.38s cubic-bezier(.36,.07,.19,.97); }
+  </style>
+</helmet>
+<div style="min-height:100vh;display:flex;justify-content:center;background:#EEF0F2;font-family:'Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
+  <div style="width:400px;max-width:100%;min-height:100vh;background:#FFFFFF;box-shadow:0 0 50px rgba(0,0,0,0.06);display:flex;flex-direction:column;">
+
+    <header style="height:56px;flex-shrink:0;display:flex;align-items:center;padding:0 12px;border-bottom:1px solid #F2F2F2;">
+      <a href="new로그인.dc.html" aria-label="이전" style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;color:#191919;text-decoration:none;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>
+      </a>
+      <span style="font-size:16px;font-weight:600;color:#191919;">회원가입</span>
+    </header>
+
+    <div style="flex:1;padding:28px 24px 36px;display:flex;flex-direction:column;">
+      <h1 style="margin:0;font-size:22px;font-weight:700;line-height:1.35;color:#191919;letter-spacing:-0.02em;">비밀번호를 설정해 주세요</h1>
+
+      <div style="margin-top:26px;">
+        <label style="display:block;font-size:13px;font-weight:600;color:#434548;margin-bottom:8px;">비밀번호</label>
+        <div class="{{ pwWrapClass }}" style="{{ pwFieldStyle }}">
+          <input ref="{{ pwRef }}" type="{{ pwType }}" value="{{ pw }}" onChange="{{ onPw }}" onFocus="{{ onPwFocus }}" onBlur="{{ onPwBlur }}" maxLength="30" placeholder="영문, 숫자, 특수문자 포함 8~16자" autoComplete="new-password" style="flex:1;min-width:0;border:none;outline:none;background:transparent;font-family:inherit;font-size:16px;color:#191919;padding:0;" />
+          <button type="button" onClick="{{ togglePw }}" aria-label="비밀번호 표시 전환" style="flex-shrink:0;width:24px;height:24px;padding:0;border:none;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#9296AC;">
+            <sc-if value="{{ showPw }}" hint-placeholder-val="{{ false }}">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            </sc-if>
+            <sc-if value="{{ hidePw }}" hint-placeholder-val="{{ true }}">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18"></path><path d="M10.6 10.6a2 2 0 002.8 2.8"></path><path d="M9.4 5.2A9.5 9.5 0 0112 5c5 0 9 4.5 9 7a12 12 0 01-2.2 3.1M6.3 6.3A12.4 12.4 0 003 12c0 2.5 4 7 9 7a9.4 9.4 0 004-.9"></path></svg>
+            </sc-if>
+          </button>
+        </div>
+
+        <!-- 공백 입력 시도 -->
+        <sc-if value="{{ spaceError }}" hint-placeholder-val="{{ false }}">
+          <p style="margin:9px 2px 0;font-size:13px;line-height:1.4;color:#FF383C;">비밀번호에 공백을 사용할 수 없습니다.</p>
+        </sc-if>
+
+        <!-- 전체 충족: 축약 -->
+        <sc-if value="{{ stateValid }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;align-items:center;gap:6px;margin-top:11px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5FBE2E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>
+            <span style="font-size:13px;font-weight:500;color:#5FBE2E;">사용 가능한 비밀번호입니다.</span>
+          </div>
+        </sc-if>
+
+        <!-- 입력 중: 실시간 체크 -->
+        <sc-if value="{{ stateTyping }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top:11px;display:flex;flex-wrap:wrap;gap:8px 16px;">
+            <sc-for list="{{ checks }}" as="c" hint-placeholder-count="4">
+              <div style="display:flex;align-items:center;gap:5px;">
+                <sc-if value="{{ c.met }}" hint-placeholder-val="{{ false }}">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5FBE2E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>
+                </sc-if>
+                <sc-if value="{{ c.unmet }}" hint-placeholder-val="{{ true }}">
+                  <span style="width:14px;height:14px;display:flex;align-items:center;justify-content:center;"><span style="width:4px;height:4px;border-radius:999px;background:#C7CAD6;display:block;"></span></span>
+                </sc-if>
+                <span style="font-size:12.5px;white-space:nowrap;color:{{ c.color }};">{{ c.label }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <sc-if value="{{ showPwError }}" hint-placeholder-val="{{ false }}">
+            <p style="margin:9px 2px 0;font-size:13px;line-height:1.4;color:#FF383C;">{{ pwErrorMsg }}</p>
+          </sc-if>
+        </sc-if>
+      </div>
+
+      <button type="button" onClick="{{ onSubmit }}" style="{{ submitStyle }}">가입 완료</button>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:400,&quot;height&quot;:720}}">
+class Component extends DCLogic {
+  state = {
+    pw: "",
+    showPw: false,
+    pwFocused: false,
+    pwTouched: false,
+    pwShake: false,
+  };
+
+  ALLOWED = "!@#$%^&*()";
+  SPECIAL_HELP = "사용 가능한 특수문자: ! @ # $ % ^ & * ( )";
+
+  stripHangul(v) { return (v || "").replace(/[\u1100-\u11FF\u3130-\u318F\uA960-\uA97F\uAC00-\uD7A3]/g, ""); }
+  // 공백은 입력에서 제거하고, 시도 시 오류 문구를 잠시 노출
+  flagSpace(raw) { if (/\s/.test(raw)) { this.setState({ spaceError: true }); clearTimeout(this._sp); this._sp = setTimeout(() => this.setState({ spaceError: false }), 2200); } }
+
+  constructor(props) { super(props); this.pwRef = React.createRef(); }
+
+  hasSpace(pw) { return /\s/.test(pw); }
+  hasDisallowed(pw) {
+    for (const ch of pw) {
+      if (/[A-Za-z0-9]/.test(ch)) continue;
+      if (/\s/.test(ch)) continue;
+      if (!this.ALLOWED.includes(ch)) return true;
+    }
+    return false;
+  }
+  hasSpecial(pw) { for (const ch of pw) if (this.ALLOWED.includes(ch)) return true; return false; }
+  tripleRepeat(pw) { return /(.)\1\1/.test(pw); }
+  sequence4(pw) {
+    if (pw.length < 4) return false;
+    let asc = 1, desc = 1;
+    for (let i = 1; i < pw.length; i++) {
+      const diff = pw.charCodeAt(i) - pw.charCodeAt(i - 1);
+      if (diff === 1) { asc++; desc = 1; }
+      else if (diff === -1) { desc++; asc = 1; }
+      else { asc = 1; desc = 1; }
+      if (asc >= 4 || desc >= 4) return true;
+    }
+    return false;
+  }
+  pwValid(pw) {
+    return pw.length >= 8 && pw.length <= 16
+      && /[A-Za-z]/.test(pw) && /[0-9]/.test(pw) && this.hasSpecial(pw)
+      && !this.hasSpace(pw) && !this.hasDisallowed(pw)
+      && !this.tripleRepeat(pw) && !this.sequence4(pw);
+  }
+  // 틀렸을 때만 노출: 특수문자 오류 → 특수문자 안내, 그 외 → 일반 안내
+  pwError(pw) {
+    if (this.hasDisallowed(pw)) return this.SPECIAL_HELP;
+    if (!this.pwValid(pw)) return "영문, 숫자, 특수문자를 포함한 8~16자로 입력해주세요.";
+    return "";
+  }
+
+  fieldStyle(borderColor) {
+    return {
+      display: "flex", alignItems: "center", gap: 8,
+      height: 54, borderRadius: 10, padding: "0 16px",
+      background: "#F7FAF6", boxSizing: "border-box",
+      border: "1.5px solid " + borderColor,
+      transition: "border-color 150ms cubic-bezier(.2,.8,.2,1)",
+    };
+  }
+  shakePw() {
+    this.setState({ pwShake: true });
+    clearTimeout(this._t); this._t = setTimeout(() => this.setState({ pwShake: false }), 400);
+  }
+  onSubmit = () => {
+    if (!this.pwValid(this.state.pw)) {
+      this.setState({ pwTouched: true });
+      this.shakePw();
+      if (this.pwRef.current) this.pwRef.current.focus();
+      return;
+    }
+    window.location.href = "new로그인.dc.html";
+  };
+
+  renderVals() {
+    const st = this.state;
+    const pw = st.pw;
+    const checks = [
+      { label: "8~16자", met: pw.length >= 8 && pw.length <= 16 },
+      { label: "영문 포함", met: /[A-Za-z]/.test(pw) },
+      { label: "숫자 포함", met: /[0-9]/.test(pw) },
+      { label: "특수문자 포함", met: this.hasSpecial(pw) },
+    ].map(c => ({ label: c.label, met: c.met, unmet: !c.met, color: c.met ? "#5FBE2E" : "#9296AC" }));
+
+    const valid = this.pwValid(pw);
+    const pwErr = this.pwError(pw);
+
+    let pwBorder = "transparent";
+    if (st.spaceError) pwBorder = "#FF383C";
+    else if (st.pwTouched && !valid && pw !== "") pwBorder = "#FF383C";
+    else if (pwErr && pw !== "") pwBorder = "#FF383C";
+    else if (st.pwFocused) pwBorder = "#C9E9B4";
+    else if (valid) pwBorder = "#9FE870";
+
+    const submitStyle = {
+      marginTop: 30, height: 52, borderRadius: 12, border: "none", width: "100%",
+      fontFamily: "inherit", fontSize: 16.5, fontWeight: 600,
+      transition: "background 150ms cubic-bezier(.2,.8,.2,1)",
+      background: valid ? "#9FE870" : "rgba(159,232,112,0.3)",
+      color: valid ? "#163300" : "rgba(22,51,0,0.35)",
+      cursor: valid ? "pointer" : "default",
+    };
+
+    return {
+      pw,
+      pwRef: this.pwRef,
+      pwType: st.showPw ? "text" : "password",
+      showPw: st.showPw, hidePw: !st.showPw,
+      onPw: (e) => { const raw = e.target.value; this.setState({ pw: this.stripHangul(raw).replace(/\s/g, "") }); this.flagSpace(raw); },
+      onPwFocus: () => this.setState({ pwFocused: true }),
+      onPwBlur: () => { this.setState({ pwFocused: false, pwTouched: true }); if (!this.pwValid(this.state.pw) && this.state.pw !== "") this.shakePw(); },
+      togglePw: () => this.setState(s => ({ showPw: !s.showPw })),
+      onSubmit: this.onSubmit,
+      pwFieldStyle: this.fieldStyle(pwBorder),
+      pwWrapClass: st.pwShake ? "ph-shake" : "",
+      spaceError: st.spaceError,
+      stateValid: pw !== "" && valid && !st.spaceError,
+      stateTyping: pw !== "" && !valid && !st.spaceError,
+      checks,
+      showPwError: this.hasDisallowed(pw) || st.pwTouched,
+      pwErrorMsg: pwErr,
+      submitStyle,
+    };
+  }
+}
+</script>
+</body>
+</html>
