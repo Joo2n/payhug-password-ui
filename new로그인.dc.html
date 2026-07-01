@@ -218,7 +218,7 @@ class Component extends DCLogic {
       loginId: st.loginId, pw: st.pw,
       pwType: st.showPw ? "text" : "password",
       showPw: st.showPw, hidePw: !st.showPw,
-      onId: (e) => this.setState({ loginId: e.target.value }),
+      onId: (e) => this.setState({ loginId: e.target.value.replace(/[^0-9]/g, "") }),
       onPw: (e) => { const raw = e.target.value; this.setState({ pw: this.stripHangul(raw).replace(/\s/g, "") }); this.flagSpace(raw); },
       onIdFocus: () => this.setState({ idFocused: true }),
       onIdBlur: () => { this.setState({ idFocused: false, idTouched: true }); if (this.idError(this.state.loginId)) this.shake("idShake"); },

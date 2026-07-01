@@ -281,7 +281,7 @@ class Component extends DCLogic {
       showPw: !st.showPw, hidePw: st.showPw, // 아이콘: 가림=눈 감김(슬래시), 보임=눈 뜸
       onUserId: (e) => this.setState({ userId: e.target.value }),
       onEmail: (e) => this.setState({ email: e.target.value }),
-      onPhone: (e) => this.setState({ phone: e.target.value }),
+      onPhone: (e) => this.setState({ phone: e.target.value.replace(/[^0-9]/g, "") }),
       onPw: (e) => { const raw = e.target.value; this.setState({ pw: this.sanitize(raw) }); this.flagSpace(raw); },
       onIdBlur: () => this.setState({ idTouched: true }),
       onEmailBlur: () => this.setState({ emailTouched: true }),
