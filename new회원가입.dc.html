@@ -165,7 +165,7 @@ class Component extends DCLogic {
       { label: "8~16자", met: pw.length >= 8 && pw.length <= 16 },
       { label: "영문 포함", met: /[A-Za-z]/.test(pw) },
       { label: "숫자 포함", met: /[0-9]/.test(pw) },
-      { label: "특수문자 포함", met: this.hasSpecial(pw) },
+      { label: "특수문자 포함", met: this.hasSpecial(pw) && !this.hasDisallowed(pw) },
     ].map(c => ({ label: c.label, met: c.met, unmet: !c.met, color: c.met ? "#5FBE2E" : "#9296AC" }));
 
     const valid = this.pwValid(pw);
