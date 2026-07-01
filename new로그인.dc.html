@@ -153,8 +153,7 @@ class Component extends DCLogic {
   pwError(pw) {
     if (pw === "") return "비밀번호를 입력해주세요.";
     if (this.hasDisallowed(pw)) return this.SPECIAL_HELP;
-    if (this.tripleRepeat(pw)) return "동일한 문자를 3회 이상 연속으로 사용할 수 없습니다.";
-    if (this.sequence4(pw)) return "연속된 문자 또는 숫자는 4자리 이상 사용할 수 없습니다.";
+    // NEW 정책: 동일문자 3회 반복·연속 4자리는 전용 문구 없이 아래 일반 안내 문구로 통일
     if (!this.pwValid(pw)) return "영문, 숫자, 특수문자를 포함한 8~16자로 입력해주세요.";
     return "";
   }
