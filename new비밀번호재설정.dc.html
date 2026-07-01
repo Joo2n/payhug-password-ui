@@ -43,7 +43,7 @@
       <div style="margin-top:32px;">
         <label style="display:block;font-size:14.4px;color:#434548;margin-bottom:8px;">새 비밀번호</label>
         <div class="{{ pwWrapClass }}" style="{{ pwFieldStyle }}">
-          <input ref="{{ pwRef }}" type="{{ pwType }}" value="{{ pw }}" onChange="{{ onPw }}" onFocus="{{ onPwFocus }}" onBlur="{{ onPwBlur }}" maxLength="30" placeholder="비밀번호 입력" autoComplete="new-password" style="flex:1;min-width:0;border:none;outline:none;background:transparent;font-family:inherit;font-size:16px;color:#191919;padding:0;" />
+          <input ref="{{ pwRef }}" type="{{ pwType }}" value="{{ pw }}" onChange="{{ onPw }}" onFocus="{{ onPwFocus }}" onBlur="{{ onPwBlur }}" maxLength="16" placeholder="비밀번호 입력" autoComplete="new-password" style="flex:1;min-width:0;border:none;outline:none;background:transparent;font-family:inherit;font-size:16px;color:#191919;padding:0;" />
           <button type="button" onClick="{{ togglePw }}" aria-label="비밀번호 표시 전환" style="flex-shrink:0;width:24px;height:24px;padding:0;border:none;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#9296AC;">
             <sc-if value="{{ showPw }}" hint-placeholder-val="{{ false }}">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z"></path><circle cx="12" cy="12" r="3"></circle></svg>
@@ -90,7 +90,7 @@
       <div style="margin-top:24px;">
         <label style="display:block;font-size:14.4px;color:#434548;margin-bottom:8px;">비밀번호 확인</label>
         <div style="{{ pw2FieldStyle }}">
-          <input type="{{ pw2Type }}" value="{{ pw2 }}" onChange="{{ onPw2 }}" onFocus="{{ onPw2Focus }}" onBlur="{{ onPw2Blur }}" maxLength="30" placeholder="비밀번호 다시 입력" autoComplete="new-password" style="flex:1;min-width:0;border:none;outline:none;background:transparent;font-family:inherit;font-size:16px;color:#191919;padding:0;" />
+          <input type="{{ pw2Type }}" value="{{ pw2 }}" onChange="{{ onPw2 }}" onFocus="{{ onPw2Focus }}" onBlur="{{ onPw2Blur }}" maxLength="16" placeholder="비밀번호 다시 입력" autoComplete="new-password" style="flex:1;min-width:0;border:none;outline:none;background:transparent;font-family:inherit;font-size:16px;color:#191919;padding:0;" />
           <button type="button" onClick="{{ togglePw2 }}" aria-label="비밀번호 표시 전환" style="flex-shrink:0;width:24px;height:24px;padding:0;border:none;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#9296AC;">
             <sc-if value="{{ showPw2 }}" hint-placeholder-val="{{ false }}">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z"></path><circle cx="12" cy="12" r="3"></circle></svg>
