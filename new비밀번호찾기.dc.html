@@ -27,6 +27,8 @@
       80% { transform: translateX(2px); }
     }
     .ph-shake { animation: phShake 0.38s cubic-bezier(.36,.07,.19,.97); }
+    @keyframes phFadeIn { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: none; } }
+    .ph-fade { animation: phFadeIn 150ms cubic-bezier(.2,.8,.2,1); }
   </style>
 </helmet>
 <div style="min-height:100vh;display:flex;flex-direction:column;background:#FAF9FA;font-family:'Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
@@ -50,9 +52,11 @@
         <div class="{{ phoneWrapClass }}" style="{{ phoneFieldStyle }}">
           <input type="tel" inputmode="numeric" value="{{ phone }}" onChange="{{ onPhone }}" onFocus="{{ onPhoneFocus }}" onBlur="{{ onPhoneBlur }}" maxLength="11" placeholder="숫자만 입력" style="flex:1;min-width:0;border:none;outline:none;background:transparent;font-family:inherit;font-size:16px;color:#191919;padding:0;" />
         </div>
-        <sc-if value="{{ showPhoneError }}" hint-placeholder-val="{{ false }}">
-          <p style="margin:8px 2px 0;font-size:13px;line-height:1.4;color:#FF383C;">{{ phoneErrorMsg }}</p>
-        </sc-if>
+        <div style="min-height:27px">
+          <sc-if value="{{ showPhoneError }}" hint-placeholder-val="{{ false }}">
+            <p class="ph-fade" style="margin:8px 2px 0;font-size:13px;line-height:1.4;color:#FF383C;">{{ phoneErrorMsg }}</p>
+          </sc-if>
+        </div>
       </div>
 
       <button type="button" onClick="{{ onVerify }}" style="{{ verifyBtnStyle }}">본인 인증</button>

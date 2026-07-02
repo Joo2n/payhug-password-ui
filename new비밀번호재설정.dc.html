@@ -27,6 +27,8 @@
       80% { transform: translateX(2px); }
     }
     .ph-shake { animation: phShake 0.38s cubic-bezier(.36,.07,.19,.97); }
+    @keyframes phFadeIn { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: none; } }
+    .ph-fade { animation: phFadeIn 150ms cubic-bezier(.2,.8,.2,1); }
   </style>
 </helmet>
 <div style="min-height:100vh;display:flex;flex-direction:column;background:#FAF9FA;font-family:'Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
@@ -54,36 +56,38 @@
           </button>
         </div>
 
-        <sc-if value="{{ stateEmpty }}" hint-placeholder-val="{{ true }}">
-          <p style="margin:8px 0 0;font-size:14.4px;color:#7E8299;">영문, 특수문자, 숫자 조합 8자 이상</p>
-        </sc-if>
-        <sc-if value="{{ spaceError }}" hint-placeholder-val="{{ false }}">
-          <p style="margin:8px 0 0;font-size:13px;line-height:1.4;color:#FF383C;">비밀번호에 공백을 사용할 수 없습니다.</p>
-        </sc-if>
-        <sc-if value="{{ stateValid }}" hint-placeholder-val="{{ false }}">
-          <div style="display:flex;align-items:center;gap:6px;margin-top:10px;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#28A745" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>
-            <span style="font-size:13px;font-weight:500;color:#28A745;">사용 가능한 비밀번호입니다.</span>
-          </div>
-        </sc-if>
-        <sc-if value="{{ stateTyping }}" hint-placeholder-val="{{ false }}">
-          <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:8px 16px;">
-            <sc-for list="{{ checks }}" as="c" hint-placeholder-count="4">
-              <div style="display:flex;align-items:center;gap:5px;">
-                <sc-if value="{{ c.met }}" hint-placeholder-val="{{ false }}">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#28A745" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>
-                </sc-if>
-                <sc-if value="{{ c.unmet }}" hint-placeholder-val="{{ true }}">
-                  <span style="width:14px;height:14px;display:flex;align-items:center;justify-content:center;"><span style="width:4px;height:4px;border-radius:999px;background:#C7CAD6;display:block;"></span></span>
-                </sc-if>
-                <span style="font-size:12.5px;white-space:nowrap;color:{{ c.color }};">{{ c.label }}</span>
-              </div>
-            </sc-for>
-          </div>
-          <sc-if value="{{ showPwError }}" hint-placeholder-val="{{ false }}">
-            <p style="margin:9px 0 0;font-size:13px;line-height:1.4;color:#FF383C;">{{ pwErrorMsg }}</p>
+        <div style="min-height:27px">
+          <sc-if value="{{ stateEmpty }}" hint-placeholder-val="{{ true }}">
+            <p class="ph-fade" style="margin:8px 0 0;font-size:14.4px;color:#7E8299;">영문, 특수문자, 숫자 조합 8자 이상</p>
           </sc-if>
-        </sc-if>
+          <sc-if value="{{ spaceError }}" hint-placeholder-val="{{ false }}">
+            <p class="ph-fade" style="margin:8px 0 0;font-size:13px;line-height:1.4;color:#FF383C;">비밀번호에 공백을 사용할 수 없습니다.</p>
+          </sc-if>
+          <sc-if value="{{ stateValid }}" hint-placeholder-val="{{ false }}">
+            <div class="ph-fade" style="display:flex;align-items:center;gap:6px;margin-top:10px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#28A745" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>
+              <span style="font-size:13px;font-weight:500;color:#28A745;">사용 가능한 비밀번호입니다.</span>
+            </div>
+          </sc-if>
+          <sc-if value="{{ stateTyping }}" hint-placeholder-val="{{ false }}">
+            <div class="ph-fade" style="margin-top:10px;display:flex;flex-wrap:wrap;gap:8px 16px;">
+              <sc-for list="{{ checks }}" as="c" hint-placeholder-count="4">
+                <div style="display:flex;align-items:center;gap:5px;">
+                  <sc-if value="{{ c.met }}" hint-placeholder-val="{{ false }}">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#28A745" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>
+                  </sc-if>
+                  <sc-if value="{{ c.unmet }}" hint-placeholder-val="{{ true }}">
+                    <span style="width:14px;height:14px;display:flex;align-items:center;justify-content:center;"><span style="width:4px;height:4px;border-radius:999px;background:#C7CAD6;display:block;"></span></span>
+                  </sc-if>
+                  <span style="font-size:12.5px;white-space:nowrap;color:{{ c.color }};">{{ c.label }}</span>
+                </div>
+              </sc-for>
+            </div>
+            <sc-if value="{{ showPwError }}" hint-placeholder-val="{{ false }}">
+              <p class="ph-fade" style="margin:9px 0 0;font-size:13px;line-height:1.4;color:#FF383C;">{{ pwErrorMsg }}</p>
+            </sc-if>
+          </sc-if>
+        </div>
       </div>
 
       <!-- 새 비밀번호 확인 -->
@@ -100,17 +104,19 @@
             </sc-if>
           </button>
         </div>
-        <sc-if value="{{ showMatch }}" hint-placeholder-val="{{ false }}">
-          <div style="display:flex;align-items:center;gap:5px;margin-top:8px;">
-            <sc-if value="{{ matchOk }}" hint-placeholder-val="{{ false }}">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#28A745" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>
-            </sc-if>
-            <sc-if value="{{ matchBad }}" hint-placeholder-val="{{ false }}">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FF383C" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18"></path><path d="M6 6l12 12"></path></svg>
-            </sc-if>
-            <span style="font-size:13px;line-height:1.4;color:{{ matchColor }};">{{ matchMsg }}</span>
-          </div>
-        </sc-if>
+        <div style="min-height:27px">
+          <sc-if value="{{ showMatch }}" hint-placeholder-val="{{ false }}">
+            <div class="ph-fade" style="display:flex;align-items:center;gap:5px;margin-top:8px;">
+              <sc-if value="{{ matchOk }}" hint-placeholder-val="{{ false }}">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#28A745" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>
+              </sc-if>
+              <sc-if value="{{ matchBad }}" hint-placeholder-val="{{ false }}">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FF383C" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18"></path><path d="M6 6l12 12"></path></svg>
+              </sc-if>
+              <span style="font-size:13px;line-height:1.4;color:{{ matchColor }};">{{ matchMsg }}</span>
+            </div>
+          </sc-if>
+        </div>
       </div>
 
       <button type="button" onClick="{{ onSubmit }}" style="{{ submitStyle }}">비밀번호 재설정</button>
