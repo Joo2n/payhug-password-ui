@@ -157,9 +157,8 @@ class Component extends DCLogic {
     const idErr = this.idError(this.state.loginId);
     const pwErr = this.pwError(this.state.pw);
     if (idErr || pwErr) {
-      this.setState({ idTouched: true, pwTouched: true });
-      if (idErr) this.shake("idShake");
-      if (pwErr) this.shake("pwShake");
+      if (idErr && this.state.loginId !== "") this.shake("idShake");
+      if (pwErr && this.state.pw !== "") this.shake("pwShake");
       return;
     }
   };
@@ -169,8 +168,8 @@ class Component extends DCLogic {
     const idErr = this.idError(st.loginId);
     const baseErr = this.pwError(st.pw);
     const pwErr = st.spaceError ? "비밀번호에 공백을 사용할 수 없습니다." : baseErr;
-    const showIdError = !!idErr && (st.loginId !== "" || st.idTouched);
-    const showPwError = st.spaceError || (!!baseErr && (st.pw !== "" || st.pwTouched));
+    const showIdError = !!idErr && st.loginId !== "";
+    const showPwError = st.spaceError || (!!baseErr && st.pw !== "");
 
     let idBorder = "transparent";
     if (showIdError) idBorder = "#FF383C";
@@ -199,9 +198,9 @@ class Component extends DCLogic {
       onId: (e) => this.setState({ loginId: e.target.value.replace(/[^0-9]/g, "") }),
       onPw: (e) => { const raw = e.target.value; this.setState({ pw: this.stripHangul(raw).replace(/\s/g, "") }); this.flagSpace(raw); },
       onIdFocus: () => this.setState({ idFocused: true }),
-      onIdBlur: () => { this.setState({ idFocused: false, idTouched: true }); if (this.idError(this.state.loginId)) this.shake("idShake"); },
+      onIdBlur: () => { this.setState({ idFocused: false }); if (this.state.loginId !== "" && this.idError(this.state.loginId)) this.shake("idShake"); },
       onPwFocus: () => this.setState({ pwFocused: true }),
-      onPwBlur: () => { this.setState({ pwFocused: false, pwTouched: true }); if (this.pwError(this.state.pw)) this.shake("pwShake"); },
+      onPwBlur: () => { this.setState({ pwFocused: false }); if (this.state.pw !== "" && this.pwError(this.state.pw)) this.shake("pwShake"); },
       togglePw: () => this.setState(s => ({ showPw: !s.showPw })),
       onLogin: this.onLogin,
       idFieldStyle: this.fieldStyle(idBorder),

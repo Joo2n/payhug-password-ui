@@ -96,8 +96,7 @@ class Component extends DCLogic {
   }
   onVerify = () => {
     if (!this.phoneValid(this.state.phone)) {
-      this.setState({ phoneTouched: true });
-      this.shake();
+      if (this.state.phone !== "") this.shake();
       return;
     }
     window.location.href = "new비밀번호재설정.dc.html";
@@ -108,7 +107,7 @@ class Component extends DCLogic {
     const err = this.phoneError(st.phone);
     const valid = err === "";
     // 형식 오류는 입력 중 실시간, 미입력 안내는 blur/시도 후
-    const showPhoneError = !!err && (st.phone !== "" || st.phoneTouched);
+    const showPhoneError = !!err && st.phone !== "";
 
     let border = "transparent";
     if (showPhoneError) border = "#FF383C";
@@ -128,7 +127,7 @@ class Component extends DCLogic {
       phone: st.phone,
       onPhone: (e) => this.setState({ phone: e.target.value.replace(/[^0-9]/g, "") }),
       onPhoneFocus: () => this.setState({ phoneFocused: true }),
-      onPhoneBlur: () => { this.setState({ phoneFocused: false, phoneTouched: true }); if (!this.phoneValid(this.state.phone) && this.state.phone !== "") this.shake(); },
+      onPhoneBlur: () => { this.setState({ phoneFocused: false }); if (!this.phoneValid(this.state.phone) && this.state.phone !== "") this.shake(); },
       onVerify: this.onVerify,
       phoneFieldStyle: this.fieldStyle(border),
       phoneWrapClass: st.phoneShake ? "ph-shake" : "",
